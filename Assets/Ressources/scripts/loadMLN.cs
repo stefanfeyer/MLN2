@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Xml;
 using System;
+using Unity.VisualScripting;
 
 public class loadMLN : MonoBehaviour
 {
@@ -36,24 +37,18 @@ public class loadMLN : MonoBehaviour
                 case XmlNodeType.Element:
                     switch (reader.Name)
                     {
+                        case "key":
+                            break;
                         case "mln":
                             Debug.Log("mln");
-                            mln = new MLN();
-                            if (reader.HasAttributes)
-                            {
-                                string attributeValue = reader.GetAttribute(0);
-                                string attributeKey = reader.LocalName;
-                                Debug.Log("attribute: " + attributeKey + " " + attributeValue);
-                            }
+                            mln = new MLN(reader.GetAttribute("id"));
+                            //XmlReader mlnReader = reader.ReadSubtree();
                             break;
                         case "layer":
                             Debug.Log("layer");
-                            layer = new Layer();
-                            //mln.addLayer(layer);
-                            break;
-                        case "node":
-                            Debug.Log("node");
-                            node = new Node();
+                            layer = new Layer(reader.GetAttribute("id"));
+                            readLayer(layer, reader.ReadSubtree());
+                            mln.addLayer(layer);
                             break;
                         case "edge":
                             Debug.Log("edge");
@@ -74,6 +69,72 @@ public class loadMLN : MonoBehaviour
                     break;
                 case XmlNodeType.Text:
                     Debug.Log("text: " + reader.Value);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private Layer readLayer(Layer layer, XmlReader layerReader)
+    {
+        while (layerReader.Read())
+        {
+            switch (layerReader.NodeType)
+            {
+                case XmlNodeType.Element:
+                    switch (layerReader.Name)
+                    {
+                        case "data":
+                            if (layerReader.GetAttribute("key") == "label")
+                            {
+                                layer.label = layerReader.Value;
+                            }
+                            break;
+                        case "node":
+                            Node node = new Node(layerReader.GetAttribute("id"));
+                            readNode(node, layerReader.ReadSubtree());
+                            layer.addNode(node);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        return layer;
+    }
+
+    void readNode(Node node, XmlReader nodeReader)
+    {
+        while (nodeReader.Read())
+        {
+            switch (nodeReader.NodeType)
+            {
+                case XmlNodeType.Element:
+                    switch (nodeReader.Name)
+                    {
+                        case "data":
+                            switch (nodeReader.GetAttribute("key"))
+                            {
+                                case "label":
+                                    node.label = nodeReader.Value;
+                                    break;
+                                case "nodeid":
+                                    // node.id = nodeReader.Value;   
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case "node":
+
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 default:
                     break;

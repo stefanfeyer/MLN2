@@ -22,8 +22,9 @@ public class Node
     //void Update(){}
 
     // Start is called before the first frame update
-    public Node()
+    public Node(string _id)
     {
+        id = _id;   
         //sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         //sphere.transform.SetParent(this.transform);
     }
@@ -43,5 +44,10 @@ public class Node
     public void addAttribute(string key, string value)
     {
         attributes.Add(new KeyValuePair<string, string>(key, value));
+    }
+
+    public void initiateNode()
+    {
+        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
     }
 }
