@@ -10,6 +10,7 @@ public class MLN
     public string id;
     public string label;
     public List<Layer> layers = new List<Layer>();
+    public List<Edge> edges = new List<Edge>();
     public List<KeyValuePair<string, string>> attributes = new List<KeyValuePair<string, string>>();
 
     // Start is called before the first frame update
@@ -21,11 +22,17 @@ public class MLN
     public MLN(string _id)
     {
         id = _id;
+        label = _id;
     }
 
     public void addLayer(Layer layer)
     {
         layers.Add(layer);
+    }
+
+    public void addEdge(Edge edge)
+    {
+        edges.Add(edge);
     }
 
     public void addAttribute(string key, string value)

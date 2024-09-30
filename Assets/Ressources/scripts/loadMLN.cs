@@ -16,6 +16,10 @@ public class loadMLN : MonoBehaviour
     void Start()
     {
         readGraph();
+        Debug.Log("MLN done: " + mln.id);
+        GameObject mlnVis = new GameObject();   
+        mlnVis.AddComponent<CreateMLNVis>().mln = mln;
+        
     }
 
     // Update is called once per frame
@@ -40,19 +44,18 @@ public class loadMLN : MonoBehaviour
                         case "key":
                             break;
                         case "mln":
-                            Debug.Log("mln");
                             mln = new MLN(reader.GetAttribute("id"));
-                            //XmlReader mlnReader = reader.ReadSubtree();
                             break;
                         case "layer":
-                            Debug.Log("layer");
                             layer = new Layer(reader.GetAttribute("id"));
                             readLayer(layer, reader.ReadSubtree());
                             mln.addLayer(layer);
                             break;
                         case "edge":
-                            Debug.Log("edge");
-                            edge = new Edge();
+                            edge = new Edge(reader.GetAttribute("id"), reader.GetAttribute("source"), reader.GetAttribute("target"));
+                            readEdge(edge, reader.ReadSubtree());
+                            mln.addEdge(edge);
+                            // adjazentliste
                             break;
                         case "data":
                             Debug.Log("data");
@@ -60,17 +63,6 @@ public class loadMLN : MonoBehaviour
                         default:
                             break;
                     }
-                    break;
-                case XmlNodeType.Attribute:
-                    Debug.Log("attribute0: " + reader.GetAttribute(0));
-                    break;
-                case XmlNodeType.EndElement:
-                    Debug.Log("end element: " + reader.Name);
-                    break;
-                case XmlNodeType.Text:
-                    Debug.Log("text: " + reader.Value);
-                    break;
-                default:
                     break;
             }
         }
@@ -88,7 +80,7 @@ public class loadMLN : MonoBehaviour
                         case "data":
                             if (layerReader.GetAttribute("key") == "label")
                             {
-                                layer.label = layerReader.Value;
+                                layer.label = (string) layerReader.ReadElementContentAs(typeof(string), null);
                             }
                             break;
                         case "node":
@@ -120,7 +112,7 @@ public class loadMLN : MonoBehaviour
                             switch (nodeReader.GetAttribute("key"))
                             {
                                 case "label":
-                                    node.label = nodeReader.Value;
+                                    node.label = (string)nodeReader.ReadElementContentAs(typeof(string), null);
                                     break;
                                 case "nodeid":
                                     // node.id = nodeReader.Value;   
@@ -131,6 +123,38 @@ public class loadMLN : MonoBehaviour
                             break;
                         case "node":
 
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void readEdge(Edge edge, XmlReader edgeReader)
+    {
+        while (edgeReader.Read())
+        {
+            switch (edgeReader.NodeType)
+            {
+                case XmlNodeType.Element:
+                    switch (edgeReader.Name)
+                    {
+                        case "data":
+                            switch (edgeReader.GetAttribute("key"))
+                            {
+                                case "label":
+                                    edge.label = (string) edgeReader.ReadElementContentAs(typeof(string), null);
+                                    break;
+                                case "weight":
+                                    edge.setWeight((string)edgeReader.ReadElementContentAs(typeof(string), null));
+                                    break;
+                                default:
+                                    break;
+                            }
                             break;
                         default:
                             break;
