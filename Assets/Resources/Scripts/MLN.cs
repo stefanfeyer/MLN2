@@ -4,21 +4,12 @@ using UnityEngine;
 
 public class MLN
 {
-    public float xPos;
-    public float yPos;
-    public float zPos;
     public string id;
     public string label;
+    public List<Node> nodes = new List<Node>();
     public List<Layer> layers = new List<Layer>();
     public List<Edge> edges = new List<Edge>();
-    public List<KeyValuePair<string, string>> attributes = new List<KeyValuePair<string, string>>();
-
-    // Start is called before the first frame update
-    //void Start(){}
-
-    // Update is called once per frame
-    // void Update(){}
-
+   
     public MLN(string _id)
     {
         id = _id;
@@ -35,8 +26,23 @@ public class MLN
         edges.Add(edge);
     }
 
-    public void addAttribute(string key, string value)
+    public void addNode(Node node)
     {
-        attributes.Add(new KeyValuePair<string, string>(key, value));
+        nodes.Add(node);
+    }
+
+    public Node getNode(string _id)
+    {
+        foreach (Node node in nodes)
+        {
+            if (node.id == _id)
+            {
+                //Debug.Log("Node ID: " + id);
+                return node;
+            }
+        }
+        // make this good
+        Debug.Log("Node ID: " + _id);
+        throw new MissingReferenceException("Node not found");
     }
 }

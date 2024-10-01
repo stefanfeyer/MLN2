@@ -6,6 +6,8 @@ public class CreateMLNVis : MonoBehaviour
 {
     public MLN mln;
     bool init = false;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +19,8 @@ public class CreateMLNVis : MonoBehaviour
     {
         if (!init && mln != null)
         {
+            init = true;
             createMLNVis();
-            init = !init;
         }
     }
 
@@ -27,18 +29,20 @@ public class CreateMLNVis : MonoBehaviour
         this.name = mln.label;
         createLayers();
         createEdges();
+        
     }
+
+    
 
 
     public void createLayers()
     {
         foreach (Layer layer in mln.layers)
         {
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            cube.name = layer.label;
-            cube.GetComponent<MeshRenderer>().enabled = false;
-            cube.transform.SetParent(this.transform);
-            createNodes(layer, cube);
+            GameObject layerVis = new GameObject(layer.label);
+            layerVis.AddComponent<LayerVis>().layer = layer;
+            layerVis.transform.SetParent(this.transform);
+            createNodes(layer, layerVis);
         }
     }
 
@@ -46,17 +50,23 @@ public class CreateMLNVis : MonoBehaviour
     {
         foreach ( Node node in layer.nodes )
         {
-            GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            sphere.name = node.label;
-            sphere.transform.SetParent(layerVis.transform);
+            GameObject nodeVis = new GameObject(node.label);
+            nodeVis.AddComponent<NodeVis>().node = node;
+            nodeVis.transform.SetParent(layerVis.transform);
         }
     }
 
     public void createEdges()
     {
+        GameObject edgeParent = new GameObject("edges");
+        edgeParent.transform.SetParent(this.transform);
         foreach ( Edge edge in mln.edges )
         {
-            
+            GameObject edgeVis = new GameObject(edge.label);
+            edgeVis.transform.SetParent(edgeParent.transform);
+            edgeVis.AddComponent<EdgeVis>();
+            edgeVis.GetComponent<EdgeVis>().edge = edge;
+            edgeVis.GetComponent<EdgeVis>().mln = mln;
         }
     }
 }

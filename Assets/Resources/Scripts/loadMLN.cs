@@ -12,14 +12,16 @@ public class loadMLN : MonoBehaviour
     public Layer layer;
     public Node node;
     public Edge edge;
+    public debugStuff debugStuff;
+
     // Start is called before the first frame update
     void Start()
     {
         readGraph();
         Debug.Log("MLN done: " + mln.id);
+        debugStuff.mln = mln;
         GameObject mlnVis = new GameObject();   
         mlnVis.AddComponent<CreateMLNVis>().mln = mln;
-        
     }
 
     // Update is called once per frame
@@ -28,9 +30,11 @@ public class loadMLN : MonoBehaviour
         
     }
 
+    
+
     void readGraph()
     {
-        StreamReader stream = new StreamReader("Assets/Ressources/Graphs/simple_MLN_mandrill_1.graphml");
+        StreamReader stream = new StreamReader("Assets/Resources/Graphs/simple_MLN_mandrill_1.graphml");
         XmlReaderSettings settings = new XmlReaderSettings();
         XmlReader reader = XmlReader.Create(stream, settings);
 
@@ -86,6 +90,7 @@ public class loadMLN : MonoBehaviour
                         case "node":
                             Node node = new Node(layerReader.GetAttribute("id"));
                             readNode(node, layerReader.ReadSubtree());
+                            mln.addNode(node);
                             layer.addNode(node);
                             break;
                         default:
