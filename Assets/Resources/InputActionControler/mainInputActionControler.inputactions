@@ -1,0 +1,54 @@
+{
+    "name": "mainInputActionControler",
+    "maps": [
+        {
+            "name": "testContr",
+            "id": "770b1e85-8bee-476f-a482-ceb84be692df",
+            "actions": [
+                {
+                    "name": "vec2Right",
+                    "type": "Value",
+                    "id": "762db29a-44e7-4344-aeb8-2e1e629010d8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "vec2Left",
+                    "type": "Value",
+                    "id": "02af329c-b7a4-4304-ab04-c2e95180d746",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3b84b1be-e143-4dcb-aa79-d788e9c21cc3",
+                    "path": "<XRController>{RightHand}/primary2DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "vec2Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6384eb09-5085-40bd-814e-4238342c37a6",
+                    "path": "<XRController>{LeftHand}/primary2DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "vec2Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Anchor
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: L1
+    uniqueID: 3731964771
+    locked: 0
+  - name: L2
+    uniqueID: 1056088343
+    locked: 0
+  - name: L3
+    uniqueID: 918262189
+    locked: 0
+  - name: L4
+    uniqueID: 2927239313
+    locked: 0
+  - name: L5
+    uniqueID: 3970730225
+    locked: 0
+  - name: L6
+    uniqueID: 2772748001
+    locked: 0
+  - name: L7
+    uniqueID: 167789383
+    locked: 0
+  - name: L8
+    uniqueID: 2993924035
+    locked: 0
+  - name: L9
+    uniqueID: 2233996833
+    locked: 0
+  - name: L10
+    uniqueID: 2393557411
+    locked: 0
+  - name: L11
+    uniqueID: 3158182267
+    locked: 0
+  - name: L12
+    uniqueID: 2335866637
+    locked: 0
+  - name: L13
+    uniqueID: 1361131253
+    locked: 0
+  - name: L14
+    uniqueID: 2605167573
+    locked: 0
+  - name: L15
+    uniqueID: 141679621
+    locked: 0
+  - name: L16
+    uniqueID: 972009787
+    locked: 0
+  - name: L17
+    uniqueID: 2456788153
+    locked: 0
+  - name: L18
+    uniqueID: 620489903
+    locked: 0
+  - name: L19
+    uniqueID: 2486930517
+    locked: 0
+  - name: L20
+    uniqueID: 3038010345
+    locked: 0
+  - name: L21
+    uniqueID: 394375513
+    locked: 0
+  - name: L22
+    uniqueID: 764477407
+    locked: 0
+  - name: L23
+    uniqueID: 972419471
+    locked: 0
+  - name: L24
+    uniqueID: 854133425
+    locked: 0
+  - name: L25
+    uniqueID: 4183248819
+    locked: 0
+  - name: L26
+    uniqueID: 3532466815
+    locked: 0
+  - name: L27
+    uniqueID: 1717179061
+    locked: 0
+  - name: L28
+    uniqueID: 931264123
+    locked: 0
+  - name: L29
+    uniqueID: 2888184499
+    locked: 0
+  - name: L30
+    uniqueID: 4033802797
+    locked: 0
